@@ -1,0 +1,13 @@
+$dimensions: ('m': 'margin', 'p': 'padding');
+$directions: ('t': 'top', 'b': 'bottom', 'l': 'left', 'r': 'right');
+@each $dim in $dimensions {
+    @each $dir in $directions {
+        @for $n from 1 through 5 {
+            $size: $n * 5;
+            .#{nth($dim, 1)}-#{nth($dir, 1)}-#{$size} {
+                #{nth($dim, 2)}-#{nth($dir, 2)}: #{$size}px; 
+            }
+        }
+    }
+}
+

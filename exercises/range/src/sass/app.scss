@@ -1,6 +1,100 @@
-@import '_variables';
-@import '_mixins';
+$thisblue: #3071a9 !default;
+$otherblue: #367ebd;
+$range_shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+$thin_dark_border: 0.2px solid #010101;
+$solid_black_border: 1px solid #000000;
 
-input[type="range"] {
-  // Add your styles here
+@mixin range-thumb() {
+  &::-moz-range-thumb {
+    @content;
+  }
+  &::-ms-thumb {
+    @content;
+  }
+}
+
+@mixin range-track() {
+  &::-webkit-slider-runnable-track {
+    @content;
+  } 
+  &::-moz-range-track {
+    @content;
+  } 
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+
+  @include range-track() {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: $range_shadow;
+    background: $thisblue;
+    border-radius: 1.3px;
+    border: $thin_dark_border;
+  }
+
+  @include range-thumb() {
+    box-shadow: $range_shadow;
+    border: $solid_black_border;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb {
+    box-shadow: $range_shadow;
+    border: $solid_black_border;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+  }
+
+  &:focus::-webkit-slider-runnable-track {
+    background: $otherblue;
+  }
+
+  &::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    background: #2a6495;
+    border: $thin_dark_border;
+    border-radius: 2.6px;
+    box-shadow: $range_shadow;
+  }
+  &::-ms-fill-upper {
+    background: $thisblue;
+    border: $thin_dark_border;
+    border-radius: 2.6px;
+    box-shadow: $range_shadow;
+  }
+
+  &:focus::-ms-fill-lower {
+    background: $thisblue;
+  }
+  &:focus::-ms-fill-upper {
+    background: $otherblue;
+  }
+
 }

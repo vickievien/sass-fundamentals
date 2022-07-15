@@ -1,10 +1,61 @@
-@import '_variables';
-@import '_mixins';
+// @import '_variables';
+// @import '_mixins';
+
+$hopbush: #c69 !default;
+$patina: #699 !default;
+$venus: #998099 !default;
+$nebula: #d2e1dd !default;
+
+$black: #000 !default;
+$white: #fff !default;
+
+$btn-disabled-opacity: 0.5 !default;
+
+@mixin theme($primary-color, $rotate: 120deg, $darkenpct: 20%) {
+  .btn-primary {
+    @include button-base($primary-color);
+  }
+  .btn-secondary {
+    @include button-base(
+      darken(
+        adjust-hue($primary-color, $rotate),
+      $darkenpct)
+    );
+  }
+  .btn-other {
+    @include button-base(
+      darken(
+        adjust-hue($primary-color, 360deg - $rotate),
+      $darkenpct)
+    );
+  }
+  .btn-other2 {
+    @include button-base(
+      darken(
+        adjust-hue($primary-color, 180deg),
+      $darkenpct)
+    );
+  }
+}
+
+@mixin button-base($color) {
+  background-color: $color;
+  border-color: darken($color, 20%);
+    
+    @if(lightness($color)<70%) {
+        color: white;
+    }
+    
+  &:hover:not(:disabled) {
+    background-color: lighten(saturate($color, 20%), 10%);
+  }
+}
 
 .btn {
   padding: 2px 10px;
   border: 1px solid transparent;
   border-radius: 2px;
+    color: black;
   &:hover:not(:disabled) {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
   }
